@@ -27,6 +27,23 @@ public class NLPGui {
 	public JTextField summaryPath;
 	public JButton summaryButton;
 	
+	public JLabel submission_RubricHeader;
+	public JLabel name_RubricHeader;
+	public JLabel papername_RubricHeader;
+	public JLabel wordCount_RubricHeader;
+	public JLabel buzzwords_RubricHeader;
+	
+	public JLabel totalGrade_RubricHeader;
+	
+	public JLabel submission_RubricValue;
+	public JLabel name_RubricValue;
+	public JLabel papername_RubricValue;
+	public JLabel wordCount_RubricValue;
+	public JLabel buzzwords_RubricValue;
+	
+	public JLabel totalGrade_RubricValue;
+	
+	
 	
 	public NLPGui() {
 		initialize();
@@ -38,10 +55,66 @@ public class NLPGui {
 		constructJTextFieldHeaders();
 		constructJTextFields();
 		constructJButtons();
+		constructRubricJTextFields();
 		addComponentsToFrame();	
 		finalizeFrame();
 	}
 	
+	private void constructRubricJTextFields() {
+		
+		// Headers
+		submission_RubricHeader = new JLabel();
+		submission_RubricHeader.setText("Submission");
+		submission_RubricHeader.setBounds(50, 300, 200, 30);
+		
+		name_RubricHeader = new JLabel();
+		name_RubricHeader.setText("Student Name Included");
+		name_RubricHeader.setBounds(50, 320, 200, 30);
+		
+		papername_RubricHeader = new JLabel();
+		papername_RubricHeader.setText("Paper Name Included");
+		papername_RubricHeader.setBounds(50, 340, 200, 30);
+		
+		wordCount_RubricHeader = new JLabel();
+		wordCount_RubricHeader.setText("250 - 300 Words Used");
+		wordCount_RubricHeader.setBounds(50, 360, 200, 30);
+		
+		buzzwords_RubricHeader = new JLabel();
+		buzzwords_RubricHeader.setText("Buzzwords Used");
+		buzzwords_RubricHeader.setBounds(50, 380, 200, 30);
+		
+		// Grade Values
+		submission_RubricValue = new JLabel();
+		submission_RubricValue.setText("0 / 50");
+		submission_RubricValue.setBounds(275, 300, 200, 30);
+		
+		name_RubricValue = new JLabel();
+		name_RubricValue.setText("0 / 5");
+		name_RubricValue.setBounds(275, 320, 200, 30);
+		
+		papername_RubricValue = new JLabel();
+		papername_RubricValue.setText("0 / 5");
+		papername_RubricValue.setBounds(275, 340, 200, 30);
+		
+		wordCount_RubricValue = new JLabel();
+		wordCount_RubricValue.setText("0 / 10");
+		wordCount_RubricValue.setBounds(275, 360, 200, 30);
+		
+		buzzwords_RubricValue = new JLabel();
+		buzzwords_RubricValue.setText("0 / 30");
+		buzzwords_RubricValue.setBounds(275, 380, 200, 30);
+		
+		//Final Grade
+		totalGrade_RubricHeader = new JLabel();
+		totalGrade_RubricHeader.setText("Final Grade");
+		totalGrade_RubricHeader.setBounds(50, 410, 200, 30);
+		
+		totalGrade_RubricValue = new JLabel();
+		totalGrade_RubricValue.setText("0 / 100");
+		totalGrade_RubricValue.setBounds(275, 410, 200, 30);
+		
+	}
+
 	private void addComponentsToFrame() {
 		frame.add(paperLabel);
 		frame.add(paperPath);
@@ -50,6 +123,21 @@ public class NLPGui {
 		frame.add(summaryLabel);
 		frame.add(summaryPath);
 		frame.add(summaryButton);	
+		
+		frame.add(submission_RubricHeader);
+		frame.add(name_RubricHeader);
+		frame.add(papername_RubricHeader);
+		frame.add(wordCount_RubricHeader);
+		frame.add(buzzwords_RubricHeader);
+		
+		frame.add(submission_RubricValue);
+		frame.add(name_RubricValue);
+		frame.add(papername_RubricValue);
+		frame.add(wordCount_RubricValue);
+		frame.add(buzzwords_RubricValue);
+		
+		frame.add(totalGrade_RubricHeader);
+		frame.add(totalGrade_RubricValue);
 	}
 
 	private void constructJTextFieldHeaders() {
@@ -78,10 +166,19 @@ public class NLPGui {
 					File selectedFile = jfc.getSelectedFile();
 					paperPath.setText(selectedFile.getAbsolutePath());
 					
-					paperPath.setBackground(Color.GREEN);
+					if (isValid(selectedFile.getAbsolutePath())) {
+						paperPath.setBackground(Color.GREEN);
+					} else {
+						paperPath.setBackground(Color.RED);
+					}
+					
 					
 				}
 				
+			}
+			
+			private boolean isValid(String path) {
+				return path.endsWith(".pdf");
 			}
 		});
 		
@@ -100,18 +197,29 @@ public class NLPGui {
 					File selectedFile = jfc.getSelectedFile();
 					summaryPath.setText(selectedFile.getAbsolutePath());
 					
-					summaryPath.setBackground(Color.GREEN);
+					if (isValid(selectedFile.getAbsolutePath())) {
+						summaryPath.setBackground(Color.GREEN);
+					} else {
+						summaryPath.setBackground(Color.RED);
+					}
+					
 				}
 				
+			}
+			
+			private boolean isValid(String path) {
+				return path.endsWith(".docx") || path.endsWith(".pdf");
 			}
 		});
 	}
 
 	private void constructJTextFields() {
 		paperPath = new JTextField("--Research Paper Path--");  
+		paperPath.setEditable(false);
 	    paperPath.setBounds(50, 100, 200, 30);  
 	    
-	    summaryPath = new JTextField("--Summary Path--");  
+	    summaryPath = new JTextField("--Summary Path--");
+	    summaryPath.setEditable(false);
 	    summaryPath.setBounds(50, 200, 200, 30);  
 		
 	}
