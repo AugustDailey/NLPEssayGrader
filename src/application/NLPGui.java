@@ -1,5 +1,6 @@
 package application;
 
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -76,6 +77,9 @@ public class NLPGui {
 				if (returnValue == JFileChooser.APPROVE_OPTION) {
 					File selectedFile = jfc.getSelectedFile();
 					paperPath.setText(selectedFile.getAbsolutePath());
+					
+					paperPath.setBackground(Color.GREEN);
+					
 				}
 				
 			}
@@ -95,6 +99,8 @@ public class NLPGui {
 				if (returnValue == JFileChooser.APPROVE_OPTION) {
 					File selectedFile = jfc.getSelectedFile();
 					summaryPath.setText(selectedFile.getAbsolutePath());
+					
+					summaryPath.setBackground(Color.GREEN);
 				}
 				
 			}
