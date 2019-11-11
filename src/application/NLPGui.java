@@ -43,6 +43,8 @@ public class NLPGui {
 	
 	public JLabel totalGrade_RubricValue;
 	
+	public JButton gradeButton;
+	
 	
 	
 	public NLPGui() {
@@ -56,10 +58,21 @@ public class NLPGui {
 		constructJTextFields();
 		constructJButtons();
 		constructRubricJTextFields();
+		constructGradeButton();
 		addComponentsToFrame();	
 		finalizeFrame();
 	}
 	
+	private void constructGradeButton() {
+		
+		gradeButton = new JButton();
+		gradeButton.setText("Grade Submission");
+		gradeButton.setEnabled(false);
+		gradeButton.setBounds(150, 250, 150, 30);
+		
+		// TODO: Add action listener that grades using the NLP logic and assign values to grade value fields
+	}
+
 	private void constructRubricJTextFields() {
 		
 		// Headers
@@ -138,6 +151,8 @@ public class NLPGui {
 		
 		frame.add(totalGrade_RubricHeader);
 		frame.add(totalGrade_RubricValue);
+		
+		frame.add(gradeButton);
 	}
 
 	private void constructJTextFieldHeaders() {
@@ -168,8 +183,12 @@ public class NLPGui {
 					
 					if (isValid(selectedFile.getAbsolutePath())) {
 						paperPath.setBackground(Color.GREEN);
+						if (summaryPath.getBackground().equals(Color.GREEN)) {
+							gradeButton.setEnabled(true);
+						}
 					} else {
 						paperPath.setBackground(Color.RED);
+						gradeButton.setEnabled(false);
 					}
 					
 					
@@ -199,8 +218,12 @@ public class NLPGui {
 					
 					if (isValid(selectedFile.getAbsolutePath())) {
 						summaryPath.setBackground(Color.GREEN);
+						if (paperPath.getBackground().equals(Color.GREEN)) {
+							gradeButton.setEnabled(true);
+						}
 					} else {
 						summaryPath.setBackground(Color.RED);
+						gradeButton.setEnabled(false);
 					}
 					
 				}
