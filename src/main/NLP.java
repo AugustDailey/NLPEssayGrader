@@ -12,13 +12,13 @@ import java.util.Set;
 
 import edu.stanford.nlp.dcoref.CorefChain;
 import edu.stanford.nlp.dcoref.CorefCoreAnnotations.CorefChainAnnotation;
-import edu.stanford.nlp.ie.util.RelationTriple;
+//import edu.stanford.nlp.ie.util.RelationTriple;
 import edu.stanford.nlp.ling.*;
 import edu.stanford.nlp.ling.CoreAnnotations.*;
-import edu.stanford.nlp.naturalli.ForwardEntailer;
-import edu.stanford.nlp.naturalli.ForwardEntailerSearchProblem;
-import edu.stanford.nlp.naturalli.NaturalLogicAnnotations;
-import edu.stanford.nlp.naturalli.NaturalLogicWeights;
+//import edu.stanford.nlp.naturalli.ForwardEntailer;
+//import edu.stanford.nlp.naturalli.ForwardEntailerSearchProblem;
+//import edu.stanford.nlp.naturalli.NaturalLogicAnnotations;
+//import edu.stanford.nlp.naturalli.NaturalLogicWeights;
 import edu.stanford.nlp.pipeline.*;
 import edu.stanford.nlp.semgraph.SemanticGraph;
 import edu.stanford.nlp.semgraph.SemanticGraphCoreAnnotations.CollapsedCCProcessedDependenciesAnnotation;
@@ -38,7 +38,7 @@ public class NLP {
     public static void main(String[] args) {
     	
         Properties props = new Properties();
-        props.put("annotators", "tokenize, ssplit, pos, lemma, ner, parse, depparse, mention, coref, natlog, openie");
+        props.put("annotators", "tokenize, ssplit, pos, lemma, ner, parse, depparse, coref, natlog, openie");
 //        props.put("annotators", "tokenize, ssplit, pos, lemma, natlog");
 //        props.put("annotators", "tokenize, ssplit, pos, lemma, ner, parse, depparse, mention, coref");
     
@@ -57,9 +57,9 @@ public class NLP {
  
         StanfordCoreNLP pipeline = new StanfordCoreNLP(props);
         // read some text in the text variable
-        String text = "Fred and David Bark are with me.";
+//        String text = "I am August.";
 //        String text = "Pick up the blue block.";
-//        String text = "In 1921, Einstein received the Nobel Prize for his original work on the photoelectric effect."; 
+        String text = "In 1921, Einstein received the Nobel Prize for his original work on the photoelectric effect."; 
 //        String text = "Did Einstein receive the Nobel Prize?"; 
 //        String text = "Mary saw a ring through the window and asked John for it.";
         // create an empty Annotation just with the given text
@@ -87,11 +87,11 @@ public class NLP {
           }
           
           System.out.println();
-          Collection<RelationTriple> triples = sentence.get(NaturalLogicAnnotations.RelationTriplesAnnotation.class); 
-          for (RelationTriple t : triples) {
-        	  System.out.println(t);
-        		  System.out.println(t.subjectLemmaGloss() + "\t" + t.relationLemmaGloss() + "\t" + t.objectLemmaGloss());
-          }
+//          Collection<RelationTriple> triples = sentence.get(NaturalLogicAnnotations.RelationTriplesAnnotation.class); 
+//          for (RelationTriple t : triples) {
+//        	  System.out.println(t);
+//        		  System.out.println(t.subjectLemmaGloss() + "\t" + t.relationLemmaGloss() + "\t" + t.objectLemmaGloss());
+//          }
           
           // this is the parse tree of the current sentence
           Tree tree = sentence.get(TreeAnnotation.class);
