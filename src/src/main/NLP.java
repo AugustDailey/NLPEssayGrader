@@ -58,6 +58,7 @@ public class NLP {
         StanfordCoreNLP pipeline = new StanfordCoreNLP(props);
         // read some text in the text variable
 //        String text = "Fred and David Bark are with me.";
+//        String text = "I am August.";
 //        String text = "Pick up the blue block.";
         String text = "In 1921, Einstein received the Nobel Prize for his original work on the photoelectric effect."; 
 //        String text = "Did Einstein receive the Nobel Prize?"; 
@@ -97,6 +98,7 @@ public class NLP {
 //          Tree tree = sentence.get(TreeAnnotation.class);
 //          System.out.println();
 //          System.out.println(tree);
+
 
 //          // this is the Stanford dependency graph of the current sentence
           
