@@ -1,4 +1,4 @@
-package main;
+package src.main;
 
 import java.io.File;
 import java.io.IOException;
@@ -38,8 +38,8 @@ public class NLP {
     public static void main(String[] args) {
     	
         Properties props = new Properties();
-        props.put("annotators", "tokenize, ssplit, pos, lemma, ner, parse, depparse, mention, coref, natlog, openie");
-//        props.put("annotators", "tokenize, ssplit, pos, lemma, natlog");
+//        props.put("annotators", "tokenize, ssplit, pos, lemma, ner, parse, depparse, coref, openie");
+        props.put("annotators", "tokenize, ssplit, pos, lemma"); //natlog
 //        props.put("annotators", "tokenize, ssplit, pos, lemma, ner, parse, depparse, mention, coref");
     
         
@@ -57,9 +57,9 @@ public class NLP {
  
         StanfordCoreNLP pipeline = new StanfordCoreNLP(props);
         // read some text in the text variable
-        String text = "Fred and David Bark are with me.";
+//        String text = "Fred and David Bark are with me.";
 //        String text = "Pick up the blue block.";
-//        String text = "In 1921, Einstein received the Nobel Prize for his original work on the photoelectric effect."; 
+        String text = "In 1921, Einstein received the Nobel Prize for his original work on the photoelectric effect."; 
 //        String text = "Did Einstein receive the Nobel Prize?"; 
 //        String text = "Mary saw a ring through the window and asked John for it.";
         // create an empty Annotation just with the given text
@@ -82,21 +82,21 @@ public class NLP {
             // this is the POS tag of the token
             String pos = token.get(PartOfSpeechAnnotation.class);
             // this is the NER label of the token
-            String ne = token.get(NamedEntityTagAnnotation.class);
-            System.out.println("word " + word + " ,pos: " + pos + " ,ne: " + ne);
+//            String ne = token.get(NamedEntityTagAnnotation.class);
+            System.out.println("word: " + word + ", pos: " + pos); // + ", ne: " + ne);
           }
           
-          System.out.println();
-          Collection<RelationTriple> triples = sentence.get(NaturalLogicAnnotations.RelationTriplesAnnotation.class); 
-          for (RelationTriple t : triples) {
-        	  System.out.println(t);
-        		  System.out.println(t.subjectLemmaGloss() + "\t" + t.relationLemmaGloss() + "\t" + t.objectLemmaGloss());
-          }
-          
-          // this is the parse tree of the current sentence
-          Tree tree = sentence.get(TreeAnnotation.class);
-          System.out.println();
-          System.out.println(tree);
+//          System.out.println();
+//          Collection<RelationTriple> triples = sentence.get(NaturalLogicAnnotations.RelationTriplesAnnotation.class); 
+//          for (RelationTriple t : triples) {
+//        	  System.out.println(t);
+//        		  System.out.println(t.subjectLemmaGloss() + "\t" + t.relationLemmaGloss() + "\t" + t.objectLemmaGloss());
+//          }
+//          
+//          // this is the parse tree of the current sentence
+//          Tree tree = sentence.get(TreeAnnotation.class);
+//          System.out.println();
+//          System.out.println(tree);
 
 //          // this is the Stanford dependency graph of the current sentence
           
@@ -108,8 +108,8 @@ public class NLP {
 //          NaturalLogicAnnotator annotator = new NaturalLogicAnnotator();
 //          annotator.annotatePolarity(CoreMap sentence);
 //          
-          SemanticGraph dependencies = sentence.get(CollapsedCCProcessedDependenciesAnnotation.class);
-          System.out.println(dependencies);
+//          SemanticGraph dependencies = sentence.get(CollapsedCCProcessedDependenciesAnnotation.class);
+//          System.out.println(dependencies);
 //          
 //          NaturalLogicWeights weights = new NaturalLogicWeights();
 //          
@@ -165,13 +165,13 @@ public class NLP {
 
         }
 
-        // This is the coreference link graph
-        // Each chain stores a set of mentions that link to each other,
-        // along with a method for getting the most representative mention
-        // Both sentence and token offsets start at 1!
-        Map<Integer, CorefChain> graph = document.get(CorefChainAnnotation.class);
-        System.out.println();
-        System.out.println(graph);
+//        // This is the coreference link graph
+//        // Each chain stores a set of mentions that link to each other,
+//        // along with a method for getting the most representative mention
+//        // Both sentence and token offsets start at 1!
+//        Map<Integer, CorefChain> graph = document.get(CorefChainAnnotation.class);
+//        System.out.println();
+//        System.out.println(graph);
 
 
     }
