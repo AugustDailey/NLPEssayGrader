@@ -11,6 +11,8 @@ public class SummaryParser {
 
 	private String paper;
 	private String summary;
+	
+	private String paperTitle;
 
 	private StringBuffer summaryBuffer;
 	
@@ -37,9 +39,10 @@ public class SummaryParser {
 			fileReader = new FileReader(file);
 			buffer = new BufferedReader(fileReader);
 
+			//Pull title
+			this.paperTitle = buffer.readLine();
+			
 			String line = buffer.readLine();
-
-			// TODO: read in the title and the authors
 
 			while (line != null) {
 				Scanner scanner = new Scanner(line);
