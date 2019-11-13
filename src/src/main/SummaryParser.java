@@ -7,6 +7,8 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.Scanner;
 
+import application.NLPGui;
+
 public class SummaryParser {
 
 	private String paper;
@@ -108,10 +110,12 @@ public class SummaryParser {
 	}
 
 	public static void main(String[] args) {
-		SummaryParser p = new SummaryParser(
-				"C:/Users/daileyab/Desktop/CSSE413/NLPEssayGrader/src/papers/Deep Blue Paper.txt",
-				"C:/Users/daileyab/Desktop/CSSE413/NLPEssayGrader/src/papers/Deep Blue Summary.txt");
-		p.loadDocuments();
+		NLPGui gui = new NLPGui();
+	
+//		SummaryParser p = new SummaryParser(gui.paperPath.getText(), gui.summaryPath.getText());
+////				"C:/Users/daileyab/Desktop/CSSE413/NLPEssayGrader/src/papers/Deep Blue Paper.txt",
+////				"C:/Users/daileyab/Desktop/CSSE413/NLPEssayGrader/src/papers/Deep Blue Summary.txt");
+//		p.loadDocuments();
 
 		//System.out.println(p.summaryBuffer.toString());
 		
