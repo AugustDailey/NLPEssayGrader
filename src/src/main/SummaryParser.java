@@ -18,14 +18,17 @@ public class SummaryParser {
 
 	private StringBuffer summaryBuffer;
 	
-	private boolean nameIncluded;
-	private boolean paperTitleIncluded;
+	public boolean nameIncluded;
+	public boolean paperTitleIncluded;
 
 	public SummaryParser(String paper, String summary) {
 		this.paper = paper;
 		this.summary = summary;
 
 		this.summaryBuffer = new StringBuffer();
+		
+		this.nameIncluded = false;
+		this.paperTitleIncluded = false;
 	}
 
 	public boolean loadDocuments() {
@@ -78,12 +81,9 @@ public class SummaryParser {
 			fileReader = new FileReader(file);
 			buffer = new BufferedReader(fileReader);
 
-			//TODO: Do we want to check for your name at the top? 
-			String name = buffer.readLine();
-			nameIncluded = verifyName(name);
-			
-			
-			String line = "";
+			//Checks for name at the top
+			String line = buffer.readLine();
+			this.nameIncluded = verifyName(line);
 			
 			while (line != null) {
 				this.summaryBuffer.append(line + " ");
@@ -104,21 +104,17 @@ public class SummaryParser {
 	private boolean verifyName(String line) {
 		String[] words = line.split("[^\\w']+");
 		for(int i = 0; i < words.length; i++) {
-			System.out.println(words[i]);
+//			System.out.println(words[i]);
+			if(words[i].charAt(0) != ((words[1]).toUpperCase()).charAt(0)){
+				System.out.println(words[i]);
+				return false;
+			}
 		}
 		return true;
 	}
 
 	public static void main(String[] args) {
 		NLPGui gui = new NLPGui();
-	
-//		SummaryParser p = new SummaryParser(gui.paperPath.getText(), gui.summaryPath.getText());
-////				"C:/Users/daileyab/Desktop/CSSE413/NLPEssayGrader/src/papers/Deep Blue Paper.txt",
-////				"C:/Users/daileyab/Desktop/CSSE413/NLPEssayGrader/src/papers/Deep Blue Summary.txt");
-//		p.loadDocuments();
-
-		//System.out.println(p.summaryBuffer.toString());
-		
 	}
 
 }

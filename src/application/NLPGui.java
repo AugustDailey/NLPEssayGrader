@@ -46,12 +46,15 @@ public class NLPGui {
 	public JLabel totalGrade_RubricValue;
 
 	public JButton gradeButton;
+	
+	private int score;
 
 	public NLPGui() {
 		initialize();
 	}
 
 	private void initialize() {
+		score = 0;
 		constructJFrame();
 		constructJPanel();
 		constructJTextFieldHeaders();
@@ -76,11 +79,23 @@ public class NLPGui {
 			public void actionPerformed(ActionEvent e) {
 				SummaryParser p = new SummaryParser(paperPath.getText(), summaryPath.getText());
 				p.loadDocuments();
+				
+				// TODO
+				//50 points for the submission
+				
+				//5 points for the name
+				if(p.nameIncluded){
+					name_RubricValue.setText("5 / 5");
+					score += 5;
+				}
+				//5 points for the article title
+				
+				//10 points for length requirements
+				
+				//5 points for the top 6 buzz words
+				System.out.println(score);
 			}
 		});
-
-		// TODO: Add action listener that grades using the NLP logic and assign
-		// values to grade value fields
 	}
 
 	private void constructRubricJTextFields() {
