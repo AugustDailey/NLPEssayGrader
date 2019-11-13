@@ -13,6 +13,9 @@ public class SummaryParser {
 	private String summary;
 
 	private StringBuffer summaryBuffer;
+	
+	private boolean nameIncluded;
+	private boolean paperTitleIncluded;
 
 	public SummaryParser(String paper, String summary) {
 		this.paper = paper;
@@ -43,7 +46,7 @@ public class SummaryParser {
 				while (scanner.hasNext()) {
 
 					// TODO: place these words into a hashmap of doubles
-					System.out.println(scanner.next());
+					scanner.next();
 
 				}
 				line = buffer.readLine();
@@ -71,8 +74,12 @@ public class SummaryParser {
 			buffer = new BufferedReader(fileReader);
 
 			//TODO: Do we want to check for your name at the top? 
+			String name = buffer.readLine();
+			nameIncluded = verifyName(name);
+			
 			
 			String line = "";
+			
 			while (line != null) {
 				this.summaryBuffer.append(line + " ");
 				line = buffer.readLine();
@@ -89,13 +96,21 @@ public class SummaryParser {
 		return true;
 	}
 
+	private boolean verifyName(String line) {
+		String[] words = line.split("[^\\w']+");
+		for(int i = 0; i < words.length; i++) {
+			System.out.println(words[i]);
+		}
+		return true;
+	}
+
 	public static void main(String[] args) {
 		SummaryParser p = new SummaryParser(
-				"C:/Users/dummitrj/OneDrive - Rose-Hulman Institute of Technology/Documents/Artificial Intelligence/AI Eclipse Workspace/NLPEssayGrader/src/papers/Deep Blue Paper.txt",
-				"C:/Users/dummitrj/OneDrive - Rose-Hulman Institute of Technology/Documents/Artificial Intelligence/AI Eclipse Workspace/NLPEssayGrader/src/papers/Deep Blue Summary.txt");
+				"C:/Users/daileyab/Desktop/CSSE413/NLPEssayGrader/src/papers/Deep Blue Paper.txt",
+				"C:/Users/daileyab/Desktop/CSSE413/NLPEssayGrader/src/papers/Deep Blue Summary.txt");
 		p.loadDocuments();
 
-		System.out.println(p.summaryBuffer.toString());
+		//System.out.println(p.summaryBuffer.toString());
 		
 	}
 

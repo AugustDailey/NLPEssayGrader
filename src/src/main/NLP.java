@@ -13,12 +13,12 @@ import java.util.Map;
 import java.util.Properties;
 import java.util.Set;
 
-import org.apache.pdfbox.cos.COSDocument;
-import org.apache.pdfbox.io.RandomAccessRead;
-import org.apache.pdfbox.pdfparser.PDFParser;
-import org.apache.pdfbox.pdmodel.PDDocument;
-import org.apache.pdfbox.printing.PDFPageable;
-import org.apache.pdfbox.text.PDFTextStripper;
+//import org.apache.pdfbox.cos.COSDocument;
+//import org.apache.pdfbox.io.RandomAccessRead;
+//import org.apache.pdfbox.pdfparser.PDFParser;
+//import org.apache.pdfbox.pdmodel.PDDocument;
+//import org.apache.pdfbox.printing.PDFPageable;
+//import org.apache.pdfbox.text.PDFTextStripper;
 
 import edu.stanford.nlp.dcoref.CorefChain;
 import edu.stanford.nlp.dcoref.CorefCoreAnnotations.CorefChainAnnotation;
