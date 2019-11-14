@@ -46,7 +46,7 @@ public class NLPGui {
 	public JLabel totalGrade_RubricValue;
 
 	public JButton gradeButton;
-	
+
 	private int score;
 
 	public NLPGui() {
@@ -54,7 +54,7 @@ public class NLPGui {
 	}
 
 	private void initialize() {
-		score = 50; //50 to start
+		score = 50; // 50 to start
 		constructJFrame();
 		constructJPanel();
 		constructJTextFieldHeaders();
@@ -79,35 +79,33 @@ public class NLPGui {
 			public void actionPerformed(ActionEvent e) {
 				SummaryParser p = new SummaryParser(paperPath.getText(), summaryPath.getText());
 				p.loadDocuments();
-				
+
 				// TODO
-				//50 points for the submission
+				// 50 points for the submission
 				score = 50;
-				
-				//5 points for the name
-				if(p.nameIncluded ){
+
+				// 5 points for the name
+				if (p.nameIncluded) {
 					name_RubricValue.setText("5 / 5");
 					score += 5;
-				}else{
+				} else {
 					name_RubricValue.setText("0 / 5");
 				}
-				
-				//5 points for the article title
-				
-				
-				//10 points for length requirements
-				if(p.summaryWordCount <= 500 && p.summaryWordCount >= 300){
+
+				// 5 points for the article title
+
+				// 10 points for length requirements
+				if (p.summaryWordCount <= 500 && p.summaryWordCount >= 300) {
 					wordCount_RubricValue.setText("10 / 10");
 					score += 10;
-				}else{
+				} else {
 					System.out.println(p.summaryWordCount);
 					wordCount_RubricValue.setText("0 / 10");
 				}
-				
-				//5 points for the top 6 buzz words
-				
-				
-				//Total score
+
+				// 5 points for the top 6 buzz words
+
+				// Total score
 				totalGrade_RubricValue.setText(score + " / 100");
 			}
 		});
