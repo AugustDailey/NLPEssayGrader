@@ -88,9 +88,12 @@ public class NLPGui {
 				if(p.nameIncluded ){
 					name_RubricValue.setText("5 / 5");
 					score += 5;
+				}else{
+					name_RubricValue.setText("0 / 5");
 				}
 				
 				//5 points for the article title
+				
 				
 				//10 points for length requirements
 				if(p.summaryWordCount <= 500 && p.summaryWordCount >= 300){
@@ -98,10 +101,14 @@ public class NLPGui {
 					score += 10;
 				}else{
 					System.out.println(p.summaryWordCount);
+					wordCount_RubricValue.setText("0 / 10");
 				}
 				
 				//5 points for the top 6 buzz words
-				System.out.println(score);
+				
+				
+				//Total score
+				totalGrade_RubricValue.setText(score + " / 100");
 			}
 		});
 	}
