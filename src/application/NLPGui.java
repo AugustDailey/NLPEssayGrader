@@ -104,7 +104,10 @@ public class NLPGui {
 				}
 
 				// 5 points for the top 6 buzz words
-
+				int buzzWordPoints = p.bigramsUsedInSummary * 5;
+				buzzwords_RubricValue.setText("" + buzzWordPoints + " / 30");
+				score += buzzWordPoints;
+				
 				// Total score
 				totalGrade_RubricValue.setText(score + " / 100");
 			}

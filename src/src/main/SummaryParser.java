@@ -5,9 +5,15 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Queue;
 import java.util.Scanner;
 
 import application.NLPGui;
+import edu.stanford.nlp.util.PriorityQueue;
 
 public class SummaryParser {
 
@@ -21,16 +27,42 @@ public class SummaryParser {
 	
 	public boolean nameIncluded;
 	public boolean paperTitleIncluded;
-
+	
+	public Map<String, Integer> bigramCounts;
+	public int bigramsUsedInSummary;
+	public List<String> wordsToIgnore;
+ 
 	public SummaryParser(String paper, String summary) {
 		this.paper = paper;
 		this.summary = summary;
 
 		this.summaryBuffer = new StringBuffer();
 		this.summaryWordCount = 0;
+		this.bigramsUsedInSummary = 0;
+		this.bigramCounts = new HashMap<>();
+		wordsToIgnore = new ArrayList<>();
+		populateWordsToIgnore();
 		
 		this.nameIncluded = false;
 		this.paperTitleIncluded = false;
+	}
+
+	private void populateWordsToIgnore() {
+		wordsToIgnore.add("the");
+		wordsToIgnore.add("to");
+		wordsToIgnore.add("from");
+		wordsToIgnore.add("and");
+		wordsToIgnore.add("of");
+		wordsToIgnore.add("and");
+		wordsToIgnore.add("in");
+		wordsToIgnore.add("on");
+		wordsToIgnore.add("but");
+		wordsToIgnore.add("or");
+		wordsToIgnore.add("nor");
+		wordsToIgnore.add("is");
+		wordsToIgnore.add("a");
+		wordsToIgnore.add("can");
+		wordsToIgnore.add("be");
 	}
 
 	public boolean loadDocuments() {
@@ -50,13 +82,30 @@ public class SummaryParser {
 			this.paperTitle = buffer.readLine();
 			
 			String line = buffer.readLine();
-
+			String previous = "";
+			String current = "";
 			while (line != null) {
 				Scanner scanner = new Scanner(line);
 				while (scanner.hasNext()) {
 
 					// TODO: place these words into a hashmap of doubles
-					scanner.next();
+					previous = current;
+					current = scanner.next();
+					
+					if (!previous.equals("") && !current.equals("")) {
+						
+						String key = previous + " " + current;
+						if (!wordsToIgnore.contains(previous) && !wordsToIgnore.contains(current)){
+							if (bigramCounts.containsKey(key)) {
+								System.out.println(key);
+								bigramCounts.put(key, bigramCounts.get(key) + 1);
+							} else {
+								
+								bigramCounts.put(key, 1);
+							}
+						}
+						
+					}
 
 				}
 				line = buffer.readLine();
@@ -106,7 +155,52 @@ public class SummaryParser {
 			e.printStackTrace();
 			return false;
 		}
+		checkBuzzWords();
 		return true;
+	}
+
+	private void checkBuzzWords() {
+
+		List<String> topSixBuzzWords = getTopXBuzzWords(6);
+		
+		for (String buzzWordBigram : topSixBuzzWords) {
+			
+			String keyWordCombo = buzzWordBigram;
+			if (this.summaryBuffer.toString().contains(keyWordCombo)) {
+				this.bigramsUsedInSummary++;
+			}
+		}
+		
+		
+	}
+
+	private List<String> getTopXBuzzWords(int i) {
+
+		List<String> topSixBuzzWords = new ArrayList<>();
+		
+		for(int x = 0; x < i; x++) {
+			topSixBuzzWords.add(getMostOccuringBigram());
+		}
+		
+		return topSixBuzzWords;
+	}
+	
+	private String getMostOccuringBigram() {
+		
+		int maxCount = 0;
+		String maxBigram = null;
+		
+		for (String bigram : bigramCounts.keySet()) {
+			int currentCount = bigramCounts.get(bigram);
+			if (currentCount > maxCount) {
+				maxBigram = bigram;
+				maxCount = currentCount; 
+			}
+		}
+		
+		bigramCounts.remove(maxBigram);
+		System.out.println("Buzzword Count: " + maxCount + " - " + maxBigram);
+		return maxBigram;
 	}
 
 	private boolean verifyName(String line) {
