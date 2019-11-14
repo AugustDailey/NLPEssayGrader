@@ -54,7 +54,7 @@ public class NLPGui {
 	}
 
 	private void initialize() {
-		score = 0;
+		score = 50; //50 to start
 		constructJFrame();
 		constructJPanel();
 		constructJTextFieldHeaders();
@@ -82,15 +82,23 @@ public class NLPGui {
 				
 				// TODO
 				//50 points for the submission
+				score = 50;
 				
 				//5 points for the name
-				if(p.nameIncluded){
+				if(p.nameIncluded ){
 					name_RubricValue.setText("5 / 5");
 					score += 5;
 				}
+				
 				//5 points for the article title
 				
 				//10 points for length requirements
+				if(p.summaryWordCount <= 500 && p.summaryWordCount >= 300){
+					wordCount_RubricValue.setText("10 / 10");
+					score += 10;
+				}else{
+					System.out.println(p.summaryWordCount);
+				}
 				
 				//5 points for the top 6 buzz words
 				System.out.println(score);

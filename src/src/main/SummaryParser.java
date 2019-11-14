@@ -13,11 +13,12 @@ public class SummaryParser {
 
 	private String paper;
 	private String summary;
-	
+
 	private String paperTitle;
 
-	private StringBuffer summaryBuffer;
-	
+	public StringBuffer summaryBuffer;
+	public int summaryWordCount;
+
 	public boolean nameIncluded;
 	public boolean paperTitleIncluded;
 
@@ -26,7 +27,8 @@ public class SummaryParser {
 		this.summary = summary;
 
 		this.summaryBuffer = new StringBuffer();
-		
+		this.summaryWordCount = 0;
+
 		this.nameIncluded = false;
 		this.paperTitleIncluded = false;
 	}
@@ -44,18 +46,16 @@ public class SummaryParser {
 			fileReader = new FileReader(file);
 			buffer = new BufferedReader(fileReader);
 
-			//Pull title
+			// Pull title
 			this.paperTitle = buffer.readLine();
-			
+
 			String line = buffer.readLine();
 
 			while (line != null) {
 				Scanner scanner = new Scanner(line);
 				while (scanner.hasNext()) {
-
-					// TODO: place these words into a hashmap of doubles
-					scanner.next();
-
+					this.summaryWordCount++;
+					System.out.println(scanner.next());
 				}
 				line = buffer.readLine();
 				scanner.close();
@@ -81,13 +81,21 @@ public class SummaryParser {
 			fileReader = new FileReader(file);
 			buffer = new BufferedReader(fileReader);
 
-			//Checks for name at the top
+			// Checks for name at the top
 			String line = buffer.readLine();
 			this.nameIncluded = verifyName(line);
-			
+
 			while (line != null) {
 				this.summaryBuffer.append(line + " ");
+				Scanner scanner = new Scanner(line);
+				while (scanner.hasNext()) {
+
+					// TODO: place these words into a hashmap of doubles
+					scanner.next();
+
+				}
 				line = buffer.readLine();
+				scanner.close();
 			}
 			fileReader.close();
 			buffer.close();
@@ -103,10 +111,11 @@ public class SummaryParser {
 
 	private boolean verifyName(String line) {
 		String[] words = line.split("[^\\w']+");
-		for(int i = 0; i < words.length; i++) {
-//			System.out.println(words[i]);
-			if(words[i].charAt(0) != ((words[1]).toUpperCase()).charAt(0)){
-				System.out.println(words[i]);
+		for (int i = 0; i < words.length; i++) {
+			// System.out.println(words[i]);
+			String word = words[i].replaceAll(" ", "");
+			if (word.charAt(0) != (word.toUpperCase()).charAt(0)) {
+				// System.out.println(words[i]);
 				return false;
 			}
 		}
