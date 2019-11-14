@@ -83,6 +83,7 @@ public class NLPGui {
 				// TODO
 				// 50 points for the submission
 				score = 50;
+				submission_RubricValue.setText("50 / 50");
 
 				// 5 points for the name
 				if (p.nameIncluded) {
@@ -93,9 +94,15 @@ public class NLPGui {
 				}
 
 				// 5 points for the article title
+				if (p.containsPaperTitle()) {
+					papername_RubricValue.setText("5 / 5");
+					score += 5;
+				} else {
+					papername_RubricValue.setText("0 / 5");
+				}
 
 				// 10 points for length requirements
-				if (p.summaryWordCount <= 500 && p.summaryWordCount >= 300) {
+				if (p.passesWordCount()) {
 					wordCount_RubricValue.setText("10 / 10");
 					score += 10;
 				} else {

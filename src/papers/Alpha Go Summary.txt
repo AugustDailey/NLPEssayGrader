@@ -1,0 +1,32 @@
+Rebecca Dummit
+Artificial Intelligence
+
+Alpha Go Summary
+
+In the paper, Mastering the game of Go with deep neural networks and tree search the
+authors discuss the combination of multiple neural networks to create the fastest, most accurate
+computer to compete against Go players, AlphaGo. The authors explain that AlphaGo isn‘t the
+first of its kind, as many other game-playing machines have existed for Go as well as Chess,
+Checkers, and Othello. The creators of AlphaGo decided to design the system in a different
+fashion than the other game-playing machines, as the logic behind Go is much more
+complicated than the others, leaving a broader tree too search through for plays, meaning it
+would take longer with previous methods.
+
+The authors decided to go with a four-part architecture, involving different neural
+networks to reduce the number of searches and increase speed. First, the system uses a rollout
+policy and a supeNised-Iearning policy network to predict all the possible moves that the human
+opponent could make, and compute the likelihoods of each move given a current state in the
+game. The second half of the system uses a reinforcement—Iearning policy network and a value
+network combined to determine the possible plays that the computer should make, based on
+what the human component will probably do and the moves that will get the computer closerto
+winning the game. The reinforcement learning network assures that the computer is also trying
+random moves, to create a broader knowledge of all the possible options, while still assessing if
+they are good moves (good moves give a better score). The value network then estimates the
+score or value of the move that the computer could make, so it‘s easierto assess and choose a
+move.
+
+In the end, the AlphaGo system ended up winning over 99% of the time against the
+other Go-playing machines before it, and even with some handicapped moves, beat the
+opponent over 77% of the time. When playing against a Go champion Fan Hui, the computer
+won all the games, 5-0.
+

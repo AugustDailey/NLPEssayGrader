@@ -216,6 +216,14 @@ public class SummaryParser {
 		return true;
 	}
 
+	public boolean passesWordCount(){
+		return this.summaryWordCount <= 500 && this.summaryWordCount >= 300;
+	}
+	
+	public boolean containsPaperTitle(){
+		return this.summaryBuffer.toString().contains(this.paperTitle);
+	}
+	
 	public static void main(String[] args) {
 		NLPGui gui = new NLPGui();
 	}
