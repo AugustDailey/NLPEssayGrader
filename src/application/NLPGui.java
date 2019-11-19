@@ -244,7 +244,7 @@ public class NLPGui {
 			}
 
 			private boolean isValid(String path) {
-				return path.endsWith(".pdf") || path.endsWith(".txt");
+				return path.endsWith(".txt");
 			}
 		});
 
@@ -277,7 +277,7 @@ public class NLPGui {
 			}
 
 			private boolean isValid(String path) {
-				return path.endsWith(".docx") || path.endsWith(".pdf") || path.endsWith(".txt");
+				return path.endsWith(".txt");
 			}
 		});
 	}

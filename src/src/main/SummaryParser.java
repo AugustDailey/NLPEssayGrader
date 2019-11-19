@@ -97,7 +97,7 @@ public class SummaryParser {
 						String key = previous + " " + current;
 						if (!wordsToIgnore.contains(previous) && !wordsToIgnore.contains(current)){
 							if (bigramCounts.containsKey(key)) {
-								System.out.println(key);
+//								System.out.println(key);
 								bigramCounts.put(key, bigramCounts.get(key) + 1);
 							} else {
 								
