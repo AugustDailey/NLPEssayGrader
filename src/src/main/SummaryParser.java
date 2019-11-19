@@ -223,9 +223,4 @@ public class SummaryParser {
 	public boolean containsPaperTitle(){
 		return this.summaryBuffer.toString().contains(this.paperTitle);
 	}
-	
-	public static void main(String[] args) {
-		NLPGui gui = new NLPGui();
-	}
-
 }
